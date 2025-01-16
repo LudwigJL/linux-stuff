@@ -67,3 +67,26 @@ then
 	fi
 fi
 
+
+if grep -qi "Fedora" $release_file
+then
+	echo "Fedora-based host identified. Performing system update..."
+	sudo dnf update -y 1>>$logfile 2>>$errorlog
+	if [ $? -ne 0 ]
+	then
+		echo "An error occured, please check the $errorlog file."
+		exit 5
+	else
+		echo "Package list update for Fedora-based system completed successfully."
+	fi
+
+	sudo dnf upgrade -y 1>>$logfile 2>>$errorlog
+	if [ $? -ne 0 ]
+	then
+		echo "An error occured, please check the $errorlog file."
+		exit 6
+	else
+		echo "System upgrade for Fedora-based system completed successfully."
+	fi
+	 
+fi
