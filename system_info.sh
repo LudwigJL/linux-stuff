@@ -74,11 +74,13 @@ function system_usage() {
 	export mem_available_gb
 }
 
+clear
 get_sudo
 get_name
 available_updates
 system_usage 
 local_ip=$(hostname -I)
+
 
 echo "THIS SYSTEM IS CURRENTLY RUNNING ON: $name"
 echo "VERSION: $version"
@@ -88,13 +90,10 @@ echo
 echo -e "\033[0;35mCPU INFORMATION\033[0m" 
 echo "$sys_stats"
 echo 
-echo -e "\033[0;35mMEMORY INTORMATION\033[0m"
+echo -e "\033[0;35mMEMORY INFORMATION\033[0m" 
 echo "MEMORY TOTAL $mem_total_gb GB"
 echo "MEMORY AVAILABLE $mem_available_gb GB"
 echo
 echo -e "\033[0;35mBASIC NETWORK INFORMATION\033[0m"
 echo "LOCAL IP-ADDRESS: $local_ip"
 echo
-
-
-
