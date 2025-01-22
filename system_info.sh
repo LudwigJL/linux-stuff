@@ -30,7 +30,6 @@ if [ -z "$version" ]; then
 	version="VERSION=UNIDENTIFIED"
 fi
 
-
 available_updates=$(apt list --upgradeable 2>/dev/null | tail -n +2 | wc -l)
 if [ $? -ne 0 ]; then
 	updates="UNABLE TO RETRIEVE UPDATE INFORMATION"
@@ -42,12 +41,10 @@ else
 	fi
 fi
 
-
 sys_stats=$(iostat -c | sed '1,2d' 2>/dev/null)
 if [ $? -ne 0 ]; then
 	sys_stats="UNABLE TO RETRIEVE CPU INFORMATION"
 fi
-
 
 if [ ! -f "$memory_file" ]; then
 	mem_total_gb="UNABLE TO RETRIEVE MEMORY INFORMATION"
@@ -58,7 +55,6 @@ fi
 
 local_ip=$(hostname -I)
 
-clear
 echo "THIS SYSTEM IS CURRENTLY RUNNING ON: $name"
 echo "VERSION: $version"
 echo  
