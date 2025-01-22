@@ -9,20 +9,6 @@
 # PARAMETER: No parameters are required.
 # NOTES: This script is aimed to simplify the process of gathering information about your debian-based system.  
 
-function ask_sudo() {
-	local prompt
-	prompt=$(sudo -nv 2>&1)
-	if [ $? -ne 0 ]; then
-		if echo $prompt | grep -q "^sudo"; then
-			echo "This script need sudo access. Enter password"
-			sudo touch /var/run/system-info.pid
-		else
-			echo "Sorry you need sudo for this, please gain the right permissions and try again."
-			exit 1
-		fi 
-	fi
-}
-
 function calculate_memory() {
 	local mem_total_kb=$(cat "$memory_file" | grep '^MemTotal:' | awk '{print $2}')
 	local mem_available_kb=$(cat "$memory_file" | grep '^MemAvailable:' | awk '{print $2}')
@@ -30,8 +16,6 @@ function calculate_memory() {
 	mem_total_gb=$(echo "scale=2; $mem_total_kb / 1048576" | bc) 
 	mem_available_gb=$(echo "scale=2; $mem_available_kb / 1048576" | bc)	
 }
-
-ask_sudo
 
 release_file=/etc/os-release
 memory_file=/proc/meminfo
