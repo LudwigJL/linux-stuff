@@ -54,7 +54,7 @@ while check_user "$user_name" ; do
 	prompt_user "The username you have chosen already exists, please re-select fresh details"
 done
 
-sudo useradd $user_name 
+sudo useradd -m $use -mr_name 
 if [ $? -ne 0 ] ; then
 	echo "Something went wrong with useradd, please try again."
 	exit 2
