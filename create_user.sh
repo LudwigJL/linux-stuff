@@ -1,11 +1,20 @@
 #!/bin/bash
+
+# FILE: create_user.sh
+# USAGE: create_user.sh OR create_user <username> (Generated default password) OR create_user <username> <password> 
+# AUTHOR: LudwigJL 
+# VERSION: 1.1
+# NOTES/BUGS: 
+# CREATED AT: 31-01-2025
+# PARAMETERS: <username> as $1 <password> as $2
+# NOTES: This script streamlines the process of creating users within the linux env. This was written on an Ubuntu system.
  
 sudo_check () {
 	local prompt
 	prompt="$(sudo -nv 2>&1)"
 	if [ $? -ne 0 ] ; then	
 		if echo $prompt | grep -q "^sudo"; then
-			echo "This script requires sudo permissions in order to create users, please enter the wanted details"
+			echo "This script requires sudo permissions in order to create users"
 			sudo touch /var/run/system-info.pid
 		else
 			echo "Sorry you need sudo for this, please gain the right permissions"
